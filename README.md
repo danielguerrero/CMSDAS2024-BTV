@@ -35,20 +35,21 @@ If there are no errors in your code, this will create a shared object `Selection
 ### Step 3:
 To test the code on one sample, try:
 ```
-root -b -q 'Selection.C+(4)'
+mkdir -p Output
+root -b -q 'Selection.C+(5)'
 ```
-This runs the selection on sample #4, for example. Likewise, it needs to be run on all samples numbered -1 (data) and 1 through 10 (MC).
+This runs the selection on sample #5, for example. Likewise, it needs to be run on all samples numbered -1 (data) and 1 through 10 (MC).
 
 ### Step 4:
 To run on all processes now type the following command.
 ```
 $source process_all.sh &>master.log &
 ```
-It takes around 20-25 mins for the jobs to complete. For information regarding the overall progress refer to the `master.log`, while individual job logs are stored in `logs/` directory. The logs can be followed, for example, using `tail -f logs/*`.
+It takes around an hour for the jobs to complete. For information regarding the overall progress refer to the `master.log`, while individual job logs are stored in `logs/` directory. The logs can be followed, for example, using `tail -f master.log logs/*`.
 
-*Tip: This step might take longer than expected, depending on your local computer's capacity. A very robust tool to run such parallel jobs locally utilising all your cores is `gnu-parallel`. It might be worth installing and learning to use this tool for future tasks. If you have it installed, try running `parallel root -b -q 'Selection.C+({})' ::: {-1,0,1,2,3,4,5,6,7,8,9,10}` to run over all jobs.*
+*Note: This step might take longer than expected, depending on your local computer's capacity.*
   
-The input sample files are located in the following location and are accessed via XRootd `root://cmseos.fnal.gov//store/user/cmsdas/2021/short_exercises/BTag/`
+FYI, the input sample files are actually located in the following location and are accessed via XRootD `root://cmseos.fnal.gov//store/user/cmsdas/2021/short_exercises/BTag/`
 
 ### Step 5:
 `make_plot.C` script can be used to check Data-MC comparison plots with two different b-tagging calibration methods, namely (1a) fixed WP-based (index=1) and (2b) discriminant reshaping (index=2) from https://twiki.cern.ch/twiki/bin/viewauth/CMS/BTagSFMethods . Also the plots w/o  applying the SFs can be obtained by switching to index=0.     

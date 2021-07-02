@@ -9,6 +9,4 @@ for sample in {-1,1,2,3,4,5,6,7,8,9,10};do
 		sleep 1
 done
 
-wait 
-
-echo "Finished running on all samples."
+echo "Finished submitting all samples. Please follow the logs to check their progress."

@@ -43,6 +43,8 @@
 #pragma link C++ class std::vector< TLorentzVector >+; 
 #endif
 
+UInt_t maxEvents = -1;
+
 std::string indexToSample(int id){
 
 	std::string sample;
@@ -73,6 +75,14 @@ double getXsec(std::string sample){
 	else if(sample=="WZ") return 27.6;
 	else if(sample=="ZZ") return 12.14;
 	else return 1.0;
+}
+float DeltaR(float eta1,float phi1,float eta2,float phi2)
+{
+	float deltaPhi = TMath::Abs(phi1-phi2);
+	float deltaEta = eta1-eta2;
+	if(deltaPhi > TMath::Pi())
+	deltaPhi = TMath::TwoPi() - deltaPhi;
+	return TMath::Sqrt(deltaEta*deltaEta + deltaPhi*deltaPhi);
 }
 
 void Selection(int index){
@@ -132,7 +142,8 @@ void Selection(int index){
 
 	std::map<std::string, TDirectory*> dir;		
 	
-	std::string inputDirPath="root://cmseos.fnal.gov//store/user/cmsdas/2021/short_exercises/BTag/";
+//	std::string inputDirPath="root://cmseos.fnal.gov//store/user/cmsdas/2021/short_exercises/BTag/";
+	std::string inputDirPath="BTag/";
 	std::string outDirPath="Output/";
 	std::string fileName;
 	std::string Channel;
@@ -148,14 +159,15 @@ void Selection(int index){
 	ULong64_t event;
 	UInt_t run, lumiBlock;
 
-	UInt_t nJet; 
+	UInt_t nJet,nMu,nEle; 
 	Float_t MET_Pt, puWeight, genWeight; 
-	Float_t Jet_Pt[999], Jet_eta[999], Jet_btagDeepFlavB[999];
+	Float_t Jet_Pt[999], Jet_eta[999], Jet_phi[999], Jet_btagDeepFlavB[999];
+	Float_t Electron_pt[999],Electron_phi[999],Electron_eta[999],Muon_pt[999],Muon_phi[999],Muon_eta[999];
 	Int_t Jet_jetId[999], Jet_puId[999], Jet_hadronFlavour[999], Jet_partonFlavour[999]; 
 ///=========================================
 
 ///=============== Output variables to store =============
-	std::vector<UInt_t> jetIdx;
+	std::vector<UInt_t> jetIdx, muIdx, eleIdx;
 	std::vector<BTagWeight::JetInfo> jetinfo;
 	
 	int numJets, nTags;
@@ -236,9 +248,21 @@ void Selection(int index){
 		tr[Channel]->SetBranchAddress("nJet",&nJet);
 		tr[Channel]->SetBranchAddress("Jet_Pt", Jet_Pt);
 		tr[Channel]->SetBranchAddress("Jet_eta", Jet_eta);
+		tr[Channel]->SetBranchAddress("Jet_phi", Jet_phi);
 		tr[Channel]->SetBranchAddress("Jet_btagDeepFlavB", Jet_btagDeepFlavB);
 		tr[Channel]->SetBranchAddress("Jet_jetId",Jet_jetId);
 		tr[Channel]->SetBranchAddress("Jet_puId", Jet_puId);
+
+		tr[Channel]->SetBranchAddress("nMuon",&nMu);
+		tr[Channel]->SetBranchAddress("Muon_pt", Muon_pt);
+		tr[Channel]->SetBranchAddress("Muon_eta",Muon_eta);
+		tr[Channel]->SetBranchAddress("Muon_phi",Muon_phi);
+
+		tr[Channel]->SetBranchAddress("nElectron",&nEle);
+		tr[Channel]->SetBranchAddress("Electron_pt", Electron_pt);
+		tr[Channel]->SetBranchAddress("Electron_eta",Electron_eta);
+		tr[Channel]->SetBranchAddress("Electron_phi",Electron_phi);
+
 		if(isMC){
 			tr[Channel]->SetBranchAddress("Jet_partonFlavour",Jet_partonFlavour);
 			tr[Channel]->SetBranchAddress("Jet_hadronFlavour",Jet_hadronFlavour);
@@ -248,20 +272,50 @@ void Selection(int index){
 		t.Start();	
 ///========================== Event loop starts	===================================
 		for(ULong64_t iEvt=0; iEvt<(ULong64_t)nEntries_[Channel]; iEvt++){
+			if (iEvt%10000==0) std::cout<<"Processed "<<iEvt<<" of "<<nEntries_[Channel]<< " events."<<std::endl;
+			if (maxEvents > 0 && iEvt >= maxEvents) break;
+
 			numJets=0; nTags=0; 
 			evtWgt = 1.0; bWeight=1.0; bWeight_ReShape=1.0;
-			jetinfo.clear(); jetIdx.clear();
+			jetinfo.clear(); jetIdx.clear(); muIdx.clear(); eleIdx.clear();
 
 			tr[Channel]->GetEntry(iEvt);	
 
 			if(isMC){ 
 				evtWgt=(Xsec_[Channel]* Lumi)/nGen_[Channel];
+				if (maxEvents > 0 && maxEvents < nEntries_[Channel]) evtWgt *= nEntries_[Channel]/maxEvents;
 				evtWgt*=(genWeight*puWeight);									
 			}	
-			
+
+			for(UInt_t iMu=0; iMu<nMu; iMu++){
+				if(! (Muon_pt[iMu] > 25.0 && fabs(Muon_eta[iMu]) < 2.4) ) continue;
+				muIdx.push_back(iMu);
+			}
+
+			for(UInt_t iEle=0; iEle<nEle; iEle++){
+				if(! (Electron_pt[iEle] > 15.0 && fabs(Electron_eta[iEle]) < 2.5) ) continue;
+				eleIdx.push_back(iEle);
+			}
+
 			for(UInt_t iJet=0; iJet<nJet; iJet++){
-				if(! (Jet_Pt[iJet] > 25.0 && fabs(Jet_eta[iJet]) < 2.5 && Jet_jetId[iJet]==6 ) ) continue;
-				jetIdx.push_back(iJet);
+				if(! (Jet_Pt[iJet] > 25.0 && fabs(Jet_eta[iJet]) < 2.5 && Jet_jetId[iJet]==6 && Jet_puId[iJet]>0) ) continue;
+
+				bool select = true;
+				for(UInt_t jj=0; jj<muIdx.size(); jj++){
+					float dRjm = DeltaR(Muon_eta[muIdx.at(jj)],Muon_phi[muIdx.at(jj)],Jet_eta[iJet],Jet_phi[iJet]);
+					if (dRjm < 0.4) {
+						select = false;
+						break;
+					}
+				}
+				for(UInt_t jj=0; jj<eleIdx.size(); jj++){
+					float dRje = DeltaR(Electron_eta[eleIdx.at(jj)],Electron_phi[eleIdx.at(jj)],Jet_eta[iJet],Jet_phi[iJet]);
+					if (dRje < 0.4) {
+						select = false;
+						break;
+					}
+				}
+				if (select)	jetIdx.push_back(iJet);
 			}
 
 
@@ -273,7 +327,7 @@ void Selection(int index){
 			
 			for(UInt_t ii=0; ii<jetIdx.size(); ii++){
 
-				if(Jet_Pt[jetIdx.at(ii)] < 20.0 || fabs(Jet_eta[jetIdx.at(ii)]) > 2.5 ) continue; /// Sanity check
+				if(Jet_Pt[jetIdx.at(ii)] < 20.0 || fabs(Jet_eta[jetIdx.at(ii)]) > 2.5 ) continue; /// Sanity check				
 				
 				if(Jet_btagDeepFlavB[jetIdx.at(ii)] > Mwp) nTags++;
 				
@@ -285,8 +339,7 @@ void Selection(int index){
 				jInfo.jetDiscr = (double)Jet_btagDeepFlavB[jetIdx.at(ii)];
 				
 				if(jInfo.jetDiscr > Mwp) jInfo.isTagged = true;
-				else jInfo.isTagged = false;
-				
+				else jInfo.isTagged = false;				
 								
 				jetinfo.push_back(jInfo);				
 			}

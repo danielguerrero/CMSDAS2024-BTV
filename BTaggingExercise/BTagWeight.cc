@@ -139,15 +139,15 @@ double BTagWeight::MCTagEfficiency(TString WP, int flavor, double pt, double eta
 double BTagWeight::TagScaleFactor(TString WP, std::string syst, int flavor, double pt, double eta, double discr){
 	
 	if(WP == "Medium"){
-		if(flavor==5){return reader->eval_auto_bounds(syst,BTagEntry::FLAV_B, eta, pt);      }
-		if(flavor==4){return reader->eval_auto_bounds(syst,BTagEntry::FLAV_C, eta, pt);      }
-		if(flavor!=5 && flavor!=4){return reader->eval_auto_bounds(syst,BTagEntry::FLAV_UDSG, eta, pt);      }		
+		if(flavor==5){return reader->eval_auto_bounds(syst,BTagEntry::FLAV_B, fabs(eta), pt);      }
+		if(flavor==4){return reader->eval_auto_bounds(syst,BTagEntry::FLAV_C, fabs(eta), pt);      }
+		if(flavor!=5 && flavor!=4){return reader->eval_auto_bounds(syst,BTagEntry::FLAV_UDSG, fabs(eta), pt);      }		
 	}
 	
 	if(WP == "ReShape"){
-		if(flavor==5){ return readerReShape->eval_auto_bounds(syst, BTagEntry::FLAV_B, eta, pt, discr); 	}
-		if(flavor==4){ return readerReShape->eval_auto_bounds(syst, BTagEntry::FLAV_C, eta, pt, discr); 	}
-		if(flavor!=5 && flavor!=4){ return readerReShape->eval_auto_bounds(syst, BTagEntry::FLAV_UDSG, eta, pt, discr); 	}
+		if(flavor==5){ return readerReShape->eval_auto_bounds(syst, BTagEntry::FLAV_B, fabs(eta), pt, discr); 	}
+		if(flavor==4){ return readerReShape->eval_auto_bounds(syst, BTagEntry::FLAV_C, fabs(eta), pt, discr); 	}
+		if(flavor!=5 && flavor!=4){ return readerReShape->eval_auto_bounds(syst, BTagEntry::FLAV_UDSG, fabs(eta), pt, discr); 	}
 	}		
 	
 	return 1.0;

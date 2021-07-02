@@ -76,7 +76,7 @@ int make_plot(std::string Var, int tune){
 	if(isFixed) plotDir+="fixedWP/";
 
 	std::string inputDirPath="Output/";
-	std::string HistoName; 
+	std::string HistoName,nomHistoName; 
 	TString fileName;
 
 	for(UInt_t zz=0; zz<var.size(); zz++){
@@ -97,10 +97,18 @@ int make_plot(std::string Var, int tune){
 			
 			HistoName=Channel+"/"+Var+"_"+Channel;
 			
-			if(isReShape && isMC) HistoName=Channel+"/"+Var+"_ReShape_"+Channel;
+			if(isReShape && isMC) {
+				HistoName=Channel+"/"+Var+"_ReShape_"+Channel;
+				nomHistoName=Channel+"/"+Var+"_noSF_"+Channel;
+			}
 			if(isnoSF && isMC) HistoName=Channel+"/"+Var+"_noSF_"+Channel;
 			
 			h_[Channel] = (TH1D*)fHisto[Channel]->Get(TString(HistoName));
+			
+			if(isReShape && isMC) {
+				TH1D* hNom = (TH1D*)fHisto[Channel]->Get(TString(nomHistoName));
+				h_[Channel]->Scale(hNom->Integral()/h_[Channel]->Integral());
+			}
 
 			if(Channel=="WZ" || Channel=="WW") h_["ZZ"]->Add(h_[Channel]);	
 			if(Channel=="DY") h_["DYLowM"]->Add(h_[Channel]);

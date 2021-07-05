@@ -62,11 +62,11 @@ It takes around 20-25 minutes for all the jobs to complete. For information rega
 
 *Note: This step might take longer than expected, depending on your local computer's capacity. While most jobs finish in a few seconds, sample index #1 a.k.a. dileptonic ttbar MC has the highest stats and takes the longest. You can play around with the `maxEvents` variable inside `Selection.C` to get it to process only a fraction of the full stats.*
 
-### Step 5:
+### Step 6:
 `make_plot.C` script can be used to check Data-MC comparison plots with two different b-tagging calibration methods, namely (1a) fixed WP-based (index=1) and (2b) discriminant reshaping (index=2) from https://twiki.cern.ch/twiki/bin/viewauth/CMS/BTagSFMethods . Also the plots w/o  applying the SFs can be obtained by switching to index=0.     
 
 ```
 mkdir -p plots/noSF/ plots/fixedWP/ plots/ReShape/
-root -l -q "make_plot.C+(\"allJetsDeepFlavB\",1)"
+root -l -b -q "make_plot.C+(\"allJetsDeepFlavB\",1)"
 ```
 One can replace the variable and the index in the above line to get plots for other observables and calibration methods. Compare the DeepJet score for the leading (first) jet using the SFs due to the two calibration methods mentioned above and also w/o any calibration SFs.

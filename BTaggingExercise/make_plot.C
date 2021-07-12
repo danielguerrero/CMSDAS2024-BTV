@@ -132,7 +132,7 @@ int make_plot(std::string Var, int tune){
 	AllMC_[Var]->SetFillStyle(3004);
 
 	h_["MuEG2017D"]->SetMarkerStyle(20); h_["MuEG2017D"]->SetLineColor(kBlack); h_["MuEG2017D"]->SetLineWidth(2);
-	hStack_[Var]->SetMaximum(1.5* TMath::Max(AllMC_[Var]->GetMaximum(), h_["MuEG2017D"]->GetMaximum()));	
+	hStack_[Var]->SetMaximum(3* TMath::Max(AllMC_[Var]->GetMaximum(), h_["MuEG2017D"]->GetMaximum()));	
 	
 
 	gr->SetMarkerStyle(20); gr->SetLineColor(kBlack); gr->SetLineWidth(2);

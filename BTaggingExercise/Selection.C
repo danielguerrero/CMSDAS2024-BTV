@@ -36,7 +36,6 @@
 
 //================= Include BTagging SF evaluator class =====================
 
-
 //================= End of solution section of code (3 of 3) ================
 
 #ifdef __MAKECINT__
@@ -201,39 +200,40 @@ void Selection(int index){
 		if(Channel!="MuEG2017D") isMC = true;
 		else isMC=false;
 
+		int nbins = 50;
 		if(!isMC){		
-			hnumJets_[Channel]=new TH1D("nJets_"+TString(Channel),"",4,0.5,4.5);						
-			hnumTags_[Channel]=new TH1D("nTags_"+TString(Channel),"",4,-0.5,3.5);			
+			hnumJets_[Channel]=new TH1D("nJets_"+TString(Channel),"",5,0.5,5.5);						
+			hnumTags_[Channel]=new TH1D("nTags_"+TString(Channel),"",5,-0.5,4.5);			
 			h_allJetsPt_[Channel]=new TH1D("allJetsPt_"+TString(Channel),"",36,20.0,200.0);
-			h_allJetsDeepFlavB_[Channel]=new TH1D("allJetsDeepFlavB_"+TString(Channel),"",20,0.0,1.0);
-			h_firstJetDeepFlavB_[Channel]=new TH1D("firstJetDeepFlavB_"+TString(Channel),"",20,0.0,1.0);
-			h_secondJetDeepFlavB_[Channel]=new TH1D("secondJetDeepFlavB_"+TString(Channel),"",20,0.0,1.0);		
+			h_allJetsDeepFlavB_[Channel]=new TH1D("allJetsDeepFlavB_"+TString(Channel),"",nbins,0.0,1.0);
+			h_firstJetDeepFlavB_[Channel]=new TH1D("firstJetDeepFlavB_"+TString(Channel),"",nbins,0.0,1.0);
+			h_secondJetDeepFlavB_[Channel]=new TH1D("secondJetDeepFlavB_"+TString(Channel),"",nbins,0.0,1.0);		
 		}
 		
 		else{
-			hnumJets_[Channel]=new TH1D("nJets_"+TString(Channel),"",4,0.5,4.5);						
-			hnumJets_ReShape[Channel]=new TH1D("nJets_ReShape_"+TString(Channel),"",4,0.5,4.5);						
-			hnumJets_noSF[Channel]=new TH1D("nJets_noSF_"+TString(Channel),"",4,0.5,4.5);						
+			hnumJets_[Channel]=new TH1D("nJets_"+TString(Channel),"",5,0.5,5.5);						
+			hnumJets_ReShape[Channel]=new TH1D("nJets_ReShape_"+TString(Channel),"",5,0.5,5.5);						
+			hnumJets_noSF[Channel]=new TH1D("nJets_noSF_"+TString(Channel),"",5,0.5,5.5);						
 
-			hnumTags_[Channel]=new TH1D("nTags_"+TString(Channel),"",4,-0.5,3.5);			
-			hnumTags_ReShape[Channel]=new TH1D("nTags_ReShape_"+TString(Channel),"",4,-0.5,3.5);			
-			hnumTags_noSF[Channel]=new TH1D("nTags_noSF_"+TString(Channel),"",4,-0.5,3.5);			
+			hnumTags_[Channel]=new TH1D("nTags_"+TString(Channel),"",5,-0.5,4.5);			
+			hnumTags_ReShape[Channel]=new TH1D("nTags_ReShape_"+TString(Channel),"",5,-0.5,4.5);			
+			hnumTags_noSF[Channel]=new TH1D("nTags_noSF_"+TString(Channel),"",5,-0.5,4.5);			
 
 			h_allJetsPt_[Channel]=new TH1D("allJetsPt_"+TString(Channel),"",36,20.0,200.0);
 			h_allJetsPt_ReShape[Channel]=new TH1D("allJetsPt_ReShape_"+TString(Channel),"",36,20.0,200.0);
 			h_allJetsPt_noSF[Channel]=new TH1D("allJetsPt_noSF_"+TString(Channel),"",36,20.0,200.0);
 
-			h_allJetsDeepFlavB_[Channel]=new TH1D("allJetsDeepFlavB_"+TString(Channel),"",20,0.0,1.0);
-			h_allJetsDeepFlavB_ReShape[Channel]=new TH1D("allJetsDeepFlavB_ReShape_"+TString(Channel),"",20,0.0,1.0);
-			h_allJetsDeepFlavB_noSF[Channel]=new TH1D("allJetsDeepFlavB_noSF_"+TString(Channel),"",20,0.0,1.0);
+			h_allJetsDeepFlavB_[Channel]=new TH1D("allJetsDeepFlavB_"+TString(Channel),"",nbins,0.0,1.0);
+			h_allJetsDeepFlavB_ReShape[Channel]=new TH1D("allJetsDeepFlavB_ReShape_"+TString(Channel),"",nbins,0.0,1.0);
+			h_allJetsDeepFlavB_noSF[Channel]=new TH1D("allJetsDeepFlavB_noSF_"+TString(Channel),"",nbins,0.0,1.0);
 
-			h_firstJetDeepFlavB_[Channel]=new TH1D("firstJetDeepFlavB_"+TString(Channel),"",20,0.0,1.0);
-			h_firstJetDeepFlavB_ReShape[Channel]=new TH1D("firstJetDeepFlavB_ReShape_"+TString(Channel),"",20,0.0,1.0);
-			h_firstJetDeepFlavB_noSF[Channel]=new TH1D("firstJetDeepFlavB_noSF_"+TString(Channel),"",20,0.0,1.0);
+			h_firstJetDeepFlavB_[Channel]=new TH1D("firstJetDeepFlavB_"+TString(Channel),"",nbins,0.0,1.0);
+			h_firstJetDeepFlavB_ReShape[Channel]=new TH1D("firstJetDeepFlavB_ReShape_"+TString(Channel),"",nbins,0.0,1.0);
+			h_firstJetDeepFlavB_noSF[Channel]=new TH1D("firstJetDeepFlavB_noSF_"+TString(Channel),"",nbins,0.0,1.0);
 
-			h_secondJetDeepFlavB_[Channel]=new TH1D("secondJetDeepFlavB_"+TString(Channel),"",20,0.0,1.0);
-			h_secondJetDeepFlavB_ReShape[Channel]=new TH1D("secondJetDeepFlavB_ReShape_"+TString(Channel),"",20,0.0,1.0);
-			h_secondJetDeepFlavB_noSF[Channel]=new TH1D("secondJetDeepFlavB_noSF_"+TString(Channel),"",20,0.0,1.0);
+			h_secondJetDeepFlavB_[Channel]=new TH1D("secondJetDeepFlavB_"+TString(Channel),"",nbins,0.0,1.0);
+			h_secondJetDeepFlavB_ReShape[Channel]=new TH1D("secondJetDeepFlavB_ReShape_"+TString(Channel),"",nbins,0.0,1.0);
+			h_secondJetDeepFlavB_noSF[Channel]=new TH1D("secondJetDeepFlavB_noSF_"+TString(Channel),"",nbins,0.0,1.0);
 		}			
 		
 		tr[Channel]->SetBranchAddress("event",&event);

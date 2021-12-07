@@ -9,11 +9,11 @@ cmsrel CMSSW_10_2_24
 cd CMSSW_10_2_24/src/
 cmsenv
 
-git clone https://github.com/mondalspandan/HATS2021/
+git clone https://github.com/mondalspandan/CMSDAS2022-BTV/
 
 scram b -j4
 
-cd HATS2021/BTaggingExercise/
+cd CMSDAS2022-BTV/BTaggingExercise/
 voms-proxy-init -voms cms
 ```
 ## Running

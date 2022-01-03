@@ -141,7 +141,7 @@ void Selection(int index){
 
 	std::map<std::string, TDirectory*> dir;		
 	
-	std::string inputDirPath="/store/user/cmsdas/2021/short_exercises/BTag/";
+	std::string inputDirPath="root://cmseos.fnal.gov//store/user/cmsdas/2021/short_exercises/BTag/";
 	// std::string inputDirPath="BTag/";
 	std::string outDirPath="Output/";
 	std::string fileName;

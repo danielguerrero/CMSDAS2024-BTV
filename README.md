@@ -25,11 +25,11 @@ You would first need to make sure the input files required for this exercise are
 
 #### Only if files are not accessible
 
-*Only in case* you cannot access the directory directly, you can download the input files to your local space. They are located at FNAL EOS and can be copied via XRootD to your local working directory. Execute:
-```
-xrdcp -r root://cmseos.fnal.gov//store/user/cmsdas/2021/short_exercises/BTag/ .
-```
-This will require ~850 MB of free space. Now you can comment out L144 in `Selection.C` and uncomment L145 instead.
+> *Only in case* you cannot access the directory directly, you can download the input files to your local space. They are located at FNAL EOS and can be copied via XRootD to your local working directory. Execute:
+> ```
+> xrdcp -r root://cmseos.fnal.gov//store/user/cmsdas/2021/short_exercises/BTag/ .
+> ```
+> This will require ~850 MB of free space. Now you can comment out L144 in `Selection.C` and uncomment L145 instead.
 
 ### Step 2:
 Out of the box, both `Selection.C` and `BTagWeight.cc` are incomplete. The exercise requires you to understand what the `BTagWeight` class does and complete it accordingly. Please refer to the twiki for instructions.

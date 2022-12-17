@@ -13,7 +13,7 @@ git clone https://github.com/IreneZoi/CMSDAS2023-BTV.git
 
 scram b -j4
 
-cd CMSDAS2022-BTV/BTaggingExercise/
+cd CMSDAS2023-BTV/BTaggingExercise/
 voms-proxy-init -voms cms
 ```
 ## Running

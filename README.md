@@ -1,5 +1,5 @@
-# CMSDAS@LPC2022
-Repository for BTaggingExercise for CMSDAS@LPC2022
+# CMSDAS@LPC2023
+Repository for BTaggingExercise for CMSDAS@LPC2023
 
 ## Installation
 ```

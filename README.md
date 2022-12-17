@@ -9,7 +9,7 @@ cmsrel CMSSW_10_2_24
 cd CMSSW_10_2_24/src/
 cmsenv
 
-git clone https://github.com/mondalspandan/CMSDAS2022-BTV/
+git clone https://github.com/IreneZoi/CMSDAS2023-BTV.git
 
 scram b -j4
 

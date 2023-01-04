@@ -1,7 +1,10 @@
 # CMSDAS@LPC2023
-Repository for BTaggingExercise for CMSDAS@LPC2023
+Repository for BTaggingExercise for CMSDAS@LPC2023 - https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideCMSDataAnalysisSchoolLPC2023TaggingExercise
 
 ## Installation
+
+The installation has been tested on the FNAL LPC assuming the pre-exercises (https://twiki.cern.ch/twiki/bin/view/CMS/CMSDASAtLPC2023#PreExercises2023) have been done in advance.
+
 ```
 export SCRAM_ARCH=slc7_amd64_gcc700
 

@@ -78,3 +78,4 @@ One can replace the variable and the index in the above line to get plots for ot
 ```
 . plotall.sh
 ```
+Hint: on FNAL LPC you can use `display` to open `.png` files.

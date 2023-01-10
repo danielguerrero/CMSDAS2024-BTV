@@ -76,6 +76,6 @@ One can replace the variable and the index in the above line to get plots for ot
 
 **Tip:** Once you are comfortable running individual root commands, you can use the following bash script to automatically plot all the histograms for you:
 ```
-. plotall.sh
+source plotall.sh
 ```
 Hint: on FNAL LPC you can use `display` to open `.png` files.

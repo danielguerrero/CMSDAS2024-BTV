@@ -1,9 +1,9 @@
-# CMSDAS@LPC2023
-Repository for BTaggingExercise for CMSDAS@LPC2023 - https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideCMSDataAnalysisSchoolLPC2023TaggingExercise
+# CMSDAS@LPC2024
+Repository for BTaggingExercise for CMSDAS@LPC2024 - https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideCMSDataAnalysisSchoolLPC2024TaggingExercise
 
 ## Installation
 
-The installation has been tested on the FNAL LPC assuming the pre-exercises (https://twiki.cern.ch/twiki/bin/view/CMS/CMSDASAtLPC2023#PreExercises2023) have been done in advance.
+The installation has been tested on the FNAL LPC assuming the pre-exercises (https://twiki.cern.ch/twiki/bin/view/CMS/CMSDASAtLPC2024#PreExercises2024) have been done in advance.
 
 ```
 export SCRAM_ARCH=slc7_amd64_gcc700
@@ -12,11 +12,11 @@ cmsrel CMSSW_10_2_24
 cd CMSSW_10_2_24/src/
 cmsenv
 
-git clone https://github.com/IreneZoi/CMSDAS2023-BTV.git
+git clone https://github.com/danielguerrero/CMSDAS2024-BTV.git
 
 scram b -j4
 
-cd CMSDAS2023-BTV/BTaggingExercise/
+cd CMSDAS2024-BTV/BTaggingExercise/
 voms-proxy-init -voms cms
 ```
 ## Running

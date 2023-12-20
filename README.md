@@ -1,5 +1,7 @@
 # CMSDAS@LPC2024
-Repository for BTaggingExercise for CMSDAS@LPC2024 - https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideCMSDataAnalysisSchoolLPC2024TaggingExercise
+Repository for BTaggingExercise for CMSDAS@LPC2024. 
+
+The exercise twiki: https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideCMSDataAnalysisSchoolLPC2024TaggingExercise
 
 ## Installation
 
@@ -36,7 +38,7 @@ You would first need to make sure the input files required for this exercise are
 > This will require ~850 MB of free space. Now you can comment out L144 in `Selection.C` and uncomment L145 instead.
 
 ### Step 2:
-Out of the box, both `Selection.C` and `BTagWeight.cc` are incomplete. The exercise requires you to understand what the `BTagWeight` class does and complete it accordingly. Please refer to the twiki for instructions.
+Out of the box, both `Selection.C` and `BTagWeight.cc` are incomplete. The exercise requires you to understand what the `BTagWeight` class does and complete it accordingly. Please refer to the twiki for instructions (Implementing BTagCalibration inside the macro): https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideCMSDataAnalysisSchoolLPC2024TaggingExercise
 
 ### Step 3:
 Once you are satisfied with your code, you can test it on one input sample. But first, it is necessary to create a library using ROOT as follows.

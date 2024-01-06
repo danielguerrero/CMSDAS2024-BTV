@@ -26,14 +26,14 @@ The b-tagging calibration SF is calculated via the `BTagWeight` class defined in
 
 ### Step 1:
 
-You would first need to make sure the input files required for this exercise are accessible. They are located in `/store/user/cmsdas/2021/short_exercises/BTag/`. You can find the path hardcoded in `Selection.C` in L144.
+You would first need to make sure the input files required for this exercise are accessible. They are located in `/store/user/cmsdas/2024/short_exercises/BTag/`. You can find the path hardcoded in `Selection.C` in L144.
 
 #### Only if files are not accessible
 
 > *Only in case* you cannot access the directory directly, you can download the input files to your local space. They are located at FNAL EOS and can be copied via XRootD to your local working directory. Execute:
 > ```
 > mkdir -p BTag
-> env -i X509_USER_PROXY=${X509_USER_PROXY} xrdcp -r root://cmseos.fnal.gov//store/user/cmsdas/2021/short_exercises/BTag BTag
+> env -i X509_USER_PROXY=${X509_USER_PROXY} xrdcp -r root://cmseos.fnal.gov//store/user/cmsdas/2024/short_exercises/BTag BTag
 > ```
 > This will require ~850 MB of free space. Now you can comment out L144 in `Selection.C` and uncomment L145 instead.
 

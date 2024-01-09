@@ -28,6 +28,10 @@ The b-tagging calibration SF is calculated via the `BTagWeight` class defined in
 
 You would first need to make sure the input files required for this exercise are accessible. They are located in `/store/user/cmsdas/2024/short_exercises/BTag/`. You can find the path hardcoded in `Selection.C` in L144.
 
+```
+eosls /store/user/cmsdas/2024/short_exercises/BTag/
+```
+
 #### Only if files are not accessible
 
 > *Only in case* you cannot access the directory directly, you can download the input files to your local space. They are located at FNAL EOS and can be copied via XRootD to your local working directory. Execute:
@@ -38,7 +42,7 @@ You would first need to make sure the input files required for this exercise are
 > This will require ~850 MB of free space. Now you can comment out L144 in `Selection.C` and uncomment L145 instead.
 
 ### Step 2:
-Out of the box, both `Selection.C` and `BTagWeight.cc` are incomplete. The exercise requires you to understand what the `BTagWeight` class does and complete it accordingly. Please refer to the twiki for instructions (Implementing BTagCalibration inside the macro): https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideCMSDataAnalysisSchoolLPC2024TaggingExercise
+Out of the box, both `Selection.C` and `BTagWeight.cc` are incomplete. The exercise requires you to understand what the `BTagWeight` class does and complete it accordingly. Please refer to the twiki for instructions (Implementing BTagCalibration inside the macro): https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideCMSDataAnalysisSchoolLPC2024TaggingExercise. Note that there is a typo in the Step-2 code box, to fix it replace &gt; with > where applicable.
 
 ### Step 3:
 Once you are satisfied with your code, you can test it on one input sample. But first, it is necessary to create a library using ROOT as follows.

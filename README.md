@@ -42,7 +42,7 @@ eosls /store/user/cmsdas/2024/short_exercises/BTag/
 > This will require ~850 MB of free space. Now you can comment out L144 in `Selection.C` and uncomment L145 instead.
 
 ### Step 2:
-Out of the box, both `Selection.C` and `BTagWeight.cc` are incomplete. The exercise requires you to understand what the `BTagWeight` class does and complete it accordingly. Please refer to the twiki for instructions (Implementing BTagCalibration inside the macro): https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideCMSDataAnalysisSchoolLPC2024TaggingExercise. Note that there is a typo in the Step-2 code box, to fix it replace &gt; with > where applicable.
+Out of the box, both `Selection.C` and `BTagWeight.cc` are incomplete. The exercise requires you to understand what the `BTagWeight` class does and complete it accordingly. Please refer to the twiki for instructions (Implementing BTagCalibration inside the macro): https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideCMSDataAnalysisSchoolLPC2024TaggingExercise.
 
 ### Step 3:
 Once you are satisfied with your code, you can test it on one input sample. But first, it is necessary to create a library using ROOT as follows.
